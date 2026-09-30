@@ -546,6 +546,35 @@ System.out.println(<span class="str">"Edad: "</span> + edad);</code></pre>
         System.out.println(<span class="str">"Opción incorrecta"</span>);
 
 }</code></pre>
+
+            <h3>Ejemplo más completo: calcular el precio de una compra</h3>
+
+            <p>El programa usa <code>switch</code> para elegir un producto y calcula el total según la cantidad.</p>
+
+            <pre><code><span class="type">int</span> producto = <span class="num">2</span>;
+<span class="type">int</span> cantidad = <span class="num">3</span>;
+<span class="type">double</span> precio = <span class="num">0</span>;
+
+<span class="kw">switch</span> (producto) {
+    <span class="kw">case</span> <span class="num">1</span>:
+        precio = <span class="num">1.50</span>;
+        <span class="kw">break</span>;
+    <span class="kw">case</span> <span class="num">2</span>:
+        precio = <span class="num">2.25</span>;
+        <span class="kw">break</span>;
+    <span class="kw">case</span> <span class="num">3</span>:
+        precio = <span class="num">3.00</span>;
+        <span class="kw">break</span>;
+    <span class="kw">default</span>:
+        System.out.println(<span class="str">"Producto no válido"</span>);
+}
+
+<span class="kw">if</span> (precio &gt; <span class="num">0</span>) {
+    <span class="type">double</span> total = precio * cantidad;
+    System.out.println(<span class="str">"Total: "</span> + total + <span class="str">" €"</span>);
+}</code></pre>
+
+            <p>Con el producto 2 y 3 unidades, el resultado es <code>Total: 6.75 €</code>.</p>
         </section>
 
         <section id="for">
@@ -568,6 +597,28 @@ Número: 2
 Número: 3
 Número: 4
 Número: 5</code></pre>
+
+            <h3>Ejemplo más completo: contar aprobados y calcular la media</h3>
+
+            <p>El bucle recorre todas las notas, las suma y cuenta cuántas son iguales o superiores a 5.</p>
+
+            <pre><code><span class="type">int</span>[] notas = {<span class="num">7</span>, <span class="num">4</span>, <span class="num">8</span>, <span class="num">5</span>, <span class="num">9</span>};
+<span class="type">int</span> suma = <span class="num">0</span>;
+<span class="type">int</span> aprobados = <span class="num">0</span>;
+
+<span class="kw">for</span> (<span class="type">int</span> i = <span class="num">0</span>; i &lt; notas.length; i++) {
+    suma += notas[i];
+
+    <span class="kw">if</span> (notas[i] &gt;= <span class="num">5</span>) {
+        aprobados++;
+    }
+}
+
+<span class="type">double</span> media = (<span class="type">double</span>) suma / notas.length;
+System.out.println(<span class="str">"Aprobados: "</span> + aprobados);
+System.out.println(<span class="str">"Media: "</span> + media);</code></pre>
+
+            <p>Resultado: <code>Aprobados: 4</code> y <code>Media: 6.6</code>.</p>
         </section>
 
         <section id="while">
@@ -586,6 +637,27 @@ Número: 5</code></pre>
     numero++;
 
 }</code></pre>
+
+            <h3>Ejemplo más completo: sumar múltiplos de 3</h3>
+
+            <p>El <code>while</code> recorre los números del 1 al 20 y cuenta y suma los que son divisibles entre 3.</p>
+
+            <pre><code><span class="type">int</span> numero = <span class="num">1</span>;
+<span class="type">int</span> suma = <span class="num">0</span>;
+<span class="type">int</span> cantidad = <span class="num">0</span>;
+
+<span class="kw">while</span> (numero &lt;= <span class="num">20</span>) {
+    <span class="kw">if</span> (numero % <span class="num">3</span> == <span class="num">0</span>) {
+        suma += numero;
+        cantidad++;
+    }
+    numero++;
+}
+
+System.out.println(<span class="str">"Múltiplos encontrados: "</span> + cantidad);
+System.out.println(<span class="str">"Suma: "</span> + suma);</code></pre>
+
+            <p>Resultado: <code>Múltiplos encontrados: 6</code> y <code>Suma: 63</code>.</p>
         </section>
 
         <section id="arrays">
@@ -702,9 +774,6 @@ System.out.println(resultado);</code></pre>
     </main>
 </div>
 
-<footer>
-    Guía básica de Java • HTML + CSS en un único archivo
-</footer>
 
 
 <script>
