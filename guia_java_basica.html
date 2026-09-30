@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java desde Cero - Guía Básica</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #000;
+            color: #fff;
+            line-height: 1.6;
+        }
+
+        header {
+            padding: 90px 20px 70px;
+            border-bottom: 1px solid #2a2a2a;
+        }
+
+        .hero {
+            width: min(1000px, 92%);
+            margin: 0 auto;
+        }
+
+        .java-logo {
+            width: 62px;
+            height: 62px;
+            display: grid;
+            place-items: center;
+            margin-bottom: 24px;
+            border: 2px solid #FD8A23;
+            color: #FD8A23;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 7vw, 5.5rem);
+            line-height: 1;
+            letter-spacing: -3px;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            color: #bdbdbd;
+            font-size: 1.05rem;
+            max-width: 720px;
+            margin-bottom: 28px;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 11px 18px;
+            color: #000;
+            background: #FD8A23;
+            border: 1px solid #FD8A23;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+
+        .button:hover {
+            background: #000;
+            color: #FD8A23;
+        }
+
+        .layout {
+            width: min(1200px, 92%);
+            margin: 50px auto;
+            display: grid;
+            grid-template-columns: 230px 1fr;
+            gap: 45px;
+        }
+
+        nav {
+            position: sticky;
+            top: 25px;
+            align-self: start;
+            border-right: 1px solid #2a2a2a;
+            padding-right: 25px;
+        }
+
+        nav h3 {
+            margin: 0 0 14px;
+            color: #fff;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        nav a {
+            display: block;
+            color: #8f8f8f;
+            text-decoration: none;
+            padding: 7px 0;
+            font-size: 0.94rem;
+        }
+
+        nav a:hover {
+            color: #FD8A23;
+        }
+
+        main {
+            min-width: 0;
+        }
+
+        section {
+            border-bottom: 1px solid #252525;
+            padding: 10px 0 45px;
+            margin-bottom: 45px;
+        }
+
+        h2 {
+            color: #fff;
+            font-size: 2rem;
+            margin-bottom: 14px;
+            letter-spacing: -1px;
+        }
+
+        h2::before {
+            content: "// ";
+            color: #FD8A23;
+        }
+
+        h3 {
+            color: #fff;
+            margin-top: 24px;
+            margin-bottom: 8px;
+        }
+
+        p,
+        li {
+            color: #c5c5c5;
+        }
+
+        ul {
+            padding-left: 22px;
+            margin-top: 10px;
+        }
+
+        li::marker {
+            color: #FD8A23;
+        }
+
+        .tip,
+        .warning {
+            margin-top: 18px;
+            padding: 14px 16px;
+            border-left: 3px solid #FD8A23;
+            background: #0b0b0b;
+            color: #cfcfcf;
+        }
+
+        pre {
+            background: #080808;
+            border: 1px solid #262626;
+            padding: 18px;
+            overflow-x: auto;
+            margin-top: 16px;
+            border-radius: 0;
+        }
+
+        code {
+            font-family: Consolas, "Courier New", monospace;
+            color: #f1f1f1;
+        }
+
+        .kw {
+            color: #FD8A23;
+        }
+
+        .type {
+            color: #fff;
+            font-weight: bold;
+        }
+
+        .str {
+            color: #d7d7d7;
+        }
+
+        .num {
+            color: #FD8A23;
+        }
+
+        .comment {
+            color: #777;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 16px;
+        }
+
+        th,
+        td {
+            border: 1px solid #2b2b2b;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background: #0b0b0b;
+            color: #FD8A23;
+        }
+
+        td {
+            color: #cfcfcf;
+        }
+
+        footer {
+            border-top: 1px solid #252525;
+            padding: 30px 20px;
+            text-align: center;
+            color: #777;
+            font-size: 0.9rem;
+        }
+
+        ::selection {
+            background: #FD8A23;
+            color: #000;
+        }
+
+        @media (max-width: 850px) {
+            header {
+                padding-top: 60px;
+            }
+
+            .layout {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            nav {
+                position: static;
+                border-right: 0;
+                border-bottom: 1px solid #2a2a2a;
+                padding: 0 0 25px;
+            }
+
+            h1 {
+                letter-spacing: -2px;
+            }
+        }
+    
+        .code-wrapper {
+            position: relative;
+            margin-top: 16px;
+        }
+
+        .code-wrapper pre {
+            margin-top: 0;
+            padding-top: 46px;
+        }
+
+        .copy-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 32px;
+            height: 32px;
+            display: grid;
+            place-items: center;
+            background: #000;
+            color: #fff;
+            border: 1px solid #333;
+            cursor: pointer;
+            z-index: 2;
+            transition: 0.2s;
+        }
+
+        .copy-button:hover {
+            color: #FD8A23;
+            border-color: #FD8A23;
+        }
+
+        .copy-button svg {
+            width: 16px;
+            height: 16px;
+            pointer-events: none;
+        }
+
+        .copy-button.copied {
+            color: #FD8A23;
+            border-color: #FD8A23;
+        }
+
+    </style>
+</head>
+
+<body>
+<div class="layout">
+
+    <nav>
+        <h3>Contenido</h3>
+        <a href="#estructura">1. Estructura básica</a>
+        <a href="#salida">2. Mostrar texto</a>
+        <a href="#variables">3. Variables</a>
+        <a href="#scanner">4. Scanner</a>
+        <a href="#operadores">5. Operadores</a>
+        <a href="#if">6. If / Else</a>
+        <a href="#switch">7. Switch</a>
+        <a href="#for">8. Bucle for</a>
+        <a href="#while">9. While</a>
+        <a href="#arrays">10. Arrays</a>
+        <a href="#metodos">11. Métodos</a>
+        <a href="#ejemplo">12. Ejemplo completo</a>
+    </nav>
+
+    <main>
+
+        <section id="estructura">
+            <h2>1. Estructura básica de Java</h2>
+            <p>
+                Un programa Java normalmente comienza con una clase y dentro de ella
+                se encuentra el método <code>main</code>. El método <code>main</code>
+                es el punto donde empieza a ejecutarse el programa.
+            </p>
+
+            <pre><code><span class="kw">public class</span> Main {
+
+    <span class="kw">public static void</span> main(String[] args) {
+
+        System.out.println(<span class="str">"Hola mundo"</span>);
+
+    }
+
+}</code></pre>
+
+            <div class="tip">
+                El nombre del archivo debe coincidir con el nombre de la clase.
+                Si la clase se llama <strong>Main</strong>, el archivo debe llamarse <strong>Main.java</strong>.
+            </div>
+        </section>
+
+        <section id="salida">
+            <h2>2. Mostrar texto por pantalla</h2>
+
+            <p>Para mostrar información usamos principalmente <code>System.out.println()</code>.</p>
+
+            <pre><code>System.out.println(<span class="str">"Hola"</span>);
+System.out.println(<span class="str">"Estoy aprendiendo Java"</span>);</code></pre>
+
+            <h3>println y print</h3>
+
+            <pre><code>System.out.print(<span class="str">"Hola "</span>);
+System.out.print(<span class="str">"Manuel"</span>);</code></pre>
+
+            <p>Resultado:</p>
+
+            <pre><code>Hola Manuel</code></pre>
+        </section>
+
+        <section id="variables">
+            <h2>3. Variables</h2>
+
+            <p>
+                Las variables sirven para guardar información que podemos utilizar
+                durante el programa.
+            </p>
+
+            <table>
+                <tr>
+                    <th>Tipo</th>
+                    <th>Uso</th>
+                    <th>Ejemplo</th>
+                </tr>
+                <tr>
+                    <td>int</td>
+                    <td>Números enteros</td>
+                    <td>25</td>
+                </tr>
+                <tr>
+                    <td>double</td>
+                    <td>Números con decimales</td>
+                    <td>19.95</td>
+                </tr>
+                <tr>
+                    <td>String</td>
+                    <td>Texto</td>
+                    <td>"Java"</td>
+                </tr>
+                <tr>
+                    <td>char</td>
+                    <td>Un carácter</td>
+                    <td>'A'</td>
+                </tr>
+                <tr>
+                    <td>boolean</td>
+                    <td>Verdadero o falso</td>
+                    <td>true</td>
+                </tr>
+            </table>
+
+            <pre><code><span class="type">int</span> edad = <span class="num">22</span>;
+<span class="type">double</span> precio = <span class="num">19.99</span>;
+<span class="type">String</span> nombre = <span class="str">"Manuel"</span>;
+<span class="type">char</span> letra = <span class="str">'A'</span>;
+<span class="type">boolean</span> aprobado = <span class="kw">true</span>;</code></pre>
+
+            <h3>Mostrar variables</h3>
+
+            <pre><code><span class="type">String</span> nombre = <span class="str">"Manuel"</span>;
+<span class="type">int</span> edad = <span class="num">22</span>;
+
+System.out.println(<span class="str">"Nombre: "</span> + nombre);
+System.out.println(<span class="str">"Edad: "</span> + edad);</code></pre>
+        </section>
+
+        <section id="scanner">
+            <h2>4. Leer datos con Scanner</h2>
+
+            <p>
+                <code>Scanner</code> permite que el usuario introduzca información
+                mediante el teclado.
+            </p>
+
+            <pre><code><span class="kw">import</span> java.util.Scanner;
+
+<span class="kw">public class</span> Main {
+
+    <span class="kw">public static void</span> main(String[] args) {
+
+        Scanner teclado = <span class="kw">new</span> Scanner(System.in);
+
+        System.out.println(<span class="str">"Introduce tu edad:"</span>);
+        <span class="type">int</span> edad = teclado.nextInt();
+
+        System.out.println(<span class="str">"Tienes "</span> + edad + <span class="str">" años"</span>);
+
+    }
+
+}</code></pre>
+
+            <h3>Métodos habituales de Scanner</h3>
+
+            <ul>
+                <li><code>nextInt()</code> → leer un número entero.</li>
+                <li><code>nextDouble()</code> → leer un decimal.</li>
+                <li><code>next()</code> → leer una palabra.</li>
+                <li><code>nextLine()</code> → leer una línea completa.</li>
+            </ul>
+        </section>
+
+        <section id="operadores">
+            <h2>5. Operadores</h2>
+
+            <h3>Operadores matemáticos</h3>
+
+            <pre><code><span class="type">int</span> suma = <span class="num">5</span> + <span class="num">3</span>;
+<span class="type">int</span> resta = <span class="num">10</span> - <span class="num">4</span>;
+<span class="type">int</span> multiplicacion = <span class="num">5</span> * <span class="num">2</span>;
+<span class="type">double</span> division = <span class="num">10.0</span> / <span class="num">3</span>;
+<span class="type">int</span> resto = <span class="num">10</span> % <span class="num">3</span>;</code></pre>
+
+            <h3>Operadores de comparación</h3>
+
+            <ul>
+                <li><code>==</code> igual</li>
+                <li><code>!=</code> diferente</li>
+                <li><code>&gt;</code> mayor que</li>
+                <li><code>&lt;</code> menor que</li>
+                <li><code>&gt;=</code> mayor o igual</li>
+                <li><code>&lt;=</code> menor o igual</li>
+            </ul>
+
+            <h3>Operadores lógicos</h3>
+
+            <ul>
+                <li><code>&&</code> AND → se deben cumplir ambas condiciones.</li>
+                <li><code>||</code> OR → basta con que se cumpla una.</li>
+                <li><code>!</code> NOT → niega una condición.</li>
+            </ul>
+        </section>
+
+        <section id="if">
+            <h2>6. Condiciones: if / else</h2>
+
+            <p>
+                Permiten ejecutar un código dependiendo de si una condición es verdadera o falsa.
+            </p>
+
+            <pre><code><span class="type">int</span> edad = <span class="num">20</span>;
+
+<span class="kw">if</span> (edad &gt;= <span class="num">18</span>) {
+
+    System.out.println(<span class="str">"Eres mayor de edad"</span>);
+
+} <span class="kw">else</span> {
+
+    System.out.println(<span class="str">"Eres menor de edad"</span>);
+
+}</code></pre>
+
+            <h3>Else if</h3>
+
+            <pre><code><span class="type">int</span> nota = <span class="num">7</span>;
+
+<span class="kw">if</span> (nota &gt;= <span class="num">9</span>) {
+
+    System.out.println(<span class="str">"Sobresaliente"</span>);
+
+} <span class="kw">else if</span> (nota &gt;= <span class="num">5</span>) {
+
+    System.out.println(<span class="str">"Aprobado"</span>);
+
+} <span class="kw">else</span> {
+
+    System.out.println(<span class="str">"Suspenso"</span>);
+
+}</code></pre>
+        </section>
+
+        <section id="switch">
+            <h2>7. Switch</h2>
+
+            <p>
+                <code>switch</code> es útil cuando queremos comprobar diferentes valores
+                posibles de una misma variable.
+            </p>
+
+            <pre><code><span class="type">int</span> opcion = <span class="num">2</span>;
+
+<span class="kw">switch</span> (opcion) {
+
+    <span class="kw">case</span> <span class="num">1</span>:
+        System.out.println(<span class="str">"Has elegido la opción 1"</span>);
+        <span class="kw">break</span>;
+
+    <span class="kw">case</span> <span class="num">2</span>:
+        System.out.println(<span class="str">"Has elegido la opción 2"</span>);
+        <span class="kw">break</span>;
+
+    <span class="kw">default</span>:
+        System.out.println(<span class="str">"Opción incorrecta"</span>);
+
+}</code></pre>
+        </section>
+
+        <section id="for">
+            <h2>8. Bucle for</h2>
+
+            <p>
+                El bucle <code>for</code> sirve para repetir código un número determinado de veces.
+            </p>
+
+            <pre><code><span class="kw">for</span> (<span class="type">int</span> i = <span class="num">1</span>; i &lt;= <span class="num">5</span>; i++) {
+
+    System.out.println(<span class="str">"Número: "</span> + i);
+
+}</code></pre>
+
+            <p>Resultado:</p>
+
+            <pre><code>Número: 1
+Número: 2
+Número: 3
+Número: 4
+Número: 5</code></pre>
+        </section>
+
+        <section id="while">
+            <h2>9. Bucle while</h2>
+
+            <p>
+                El bucle <code>while</code> se repite mientras se cumpla una condición.
+            </p>
+
+            <pre><code><span class="type">int</span> numero = <span class="num">1</span>;
+
+<span class="kw">while</span> (numero &lt;= <span class="num">5</span>) {
+
+    System.out.println(numero);
+
+    numero++;
+
+}</code></pre>
+        </section>
+
+        <section id="arrays">
+            <h2>10. Arrays</h2>
+
+            <p>
+                Un array permite guardar varios valores del mismo tipo dentro de una sola variable.
+            </p>
+
+            <pre><code><span class="type">int</span>[] numeros = {<span class="num">10</span>, <span class="num">20</span>, <span class="num">30</span>, <span class="num">40</span>};
+
+System.out.println(numeros[<span class="num">0</span>]);
+System.out.println(numeros[<span class="num">1</span>]);</code></pre>
+
+            <div class="warning">
+                Las posiciones de un array empiezan en <strong>0</strong>.
+            </div>
+
+            <h3>Recorrer un array</h3>
+
+            <pre><code><span class="type">int</span>[] numeros = {<span class="num">10</span>, <span class="num">20</span>, <span class="num">30</span>};
+
+<span class="kw">for</span> (<span class="type">int</span> i = <span class="num">0</span>; i &lt; numeros.length; i++) {
+
+    System.out.println(numeros[i]);
+
+}</code></pre>
+        </section>
+
+        <section id="metodos">
+            <h2>11. Métodos</h2>
+
+            <p>
+                Los métodos nos permiten separar el programa en pequeñas partes reutilizables.
+            </p>
+
+            <pre><code><span class="kw">public class</span> Main {
+
+    <span class="kw">public static void</span> saludar() {
+
+        System.out.println(<span class="str">"Hola desde un método"</span>);
+
+    }
+
+    <span class="kw">public static void</span> main(String[] args) {
+
+        saludar();
+
+    }
+
+}</code></pre>
+
+            <h3>Método que devuelve un valor</h3>
+
+            <pre><code><span class="kw">public static</span> <span class="type">int</span> sumar(<span class="type">int</span> numero1, <span class="type">int</span> numero2) {
+
+    <span class="kw">return</span> numero1 + numero2;
+
+}</code></pre>
+
+            <p>Uso:</p>
+
+            <pre><code><span class="type">int</span> resultado = sumar(<span class="num">5</span>, <span class="num">3</span>);
+
+System.out.println(resultado);</code></pre>
+        </section>
+
+        <section id="ejemplo">
+            <h2>12. Ejemplo completo</h2>
+
+            <p>
+                Este programa pide el nombre y la edad del usuario y después indica
+                si es mayor de edad.
+            </p>
+
+            <pre><code><span class="kw">import</span> java.util.Scanner;
+
+<span class="kw">public class</span> Main {
+
+    <span class="kw">public static void</span> main(String[] args) {
+
+        Scanner teclado = <span class="kw">new</span> Scanner(System.in);
+
+        System.out.println(<span class="str">"Introduce tu nombre:"</span>);
+        String nombre = teclado.nextLine();
+
+        System.out.println(<span class="str">"Introduce tu edad:"</span>);
+        <span class="type">int</span> edad = teclado.nextInt();
+
+        System.out.println(<span class="str">"Hola "</span> + nombre);
+
+        <span class="kw">if</span> (edad &gt;= <span class="num">18</span>) {
+
+            System.out.println(<span class="str">"Eres mayor de edad"</span>);
+
+        } <span class="kw">else</span> {
+
+            System.out.println(<span class="str">"Eres menor de edad"</span>);
+
+        }
+
+        teclado.close();
+
+    }
+
+}</code></pre>
+
+            <div class="tip">
+                Intenta modificar los ejemplos, cambiar números, añadir condiciones
+                y provocar errores. Es una de las mejores formas de aprender.
+            </div>
+        </section>
+
+    </main>
+</div>
+
+<footer>
+    Guía básica de Java • HTML + CSS en un único archivo
+</footer>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const codeBlocks = document.querySelectorAll("pre");
+
+    codeBlocks.forEach(function (pre) {
+        const wrapper = document.createElement("div");
+        wrapper.className = "code-wrapper";
+
+        pre.parentNode.insertBefore(wrapper, pre);
+        wrapper.appendChild(pre);
+
+        const button = document.createElement("button");
+        button.className = "copy-button";
+        button.type = "button";
+        button.title = "Copiar código";
+        button.setAttribute("aria-label", "Copiar código");
+
+        button.innerHTML = `
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="9" y="9" width="13" height="13" rx="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+        `;
+
+        button.addEventListener("click", async function () {
+            const code = pre.innerText;
+
+            try {
+                await navigator.clipboard.writeText(code);
+                button.classList.add("copied");
+                button.title = "Copiado";
+
+                setTimeout(function () {
+                    button.classList.remove("copied");
+                    button.title = "Copiar código";
+                }, 1200);
+            } catch (error) {
+                const textarea = document.createElement("textarea");
+                textarea.value = code;
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand("copy");
+                textarea.remove();
+
+                button.classList.add("copied");
+                button.title = "Copiado";
+
+                setTimeout(function () {
+                    button.classList.remove("copied");
+                    button.title = "Copiar código";
+                }, 1200);
+            }
+        });
+
+        wrapper.appendChild(button);
+    });
+});
+</script>
+
+</body>
+</html>
