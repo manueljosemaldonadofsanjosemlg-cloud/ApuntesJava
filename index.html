@@ -316,6 +316,7 @@
         <a href="#arrays">10. Arrays</a>
         <a href="#metodos">11. Métodos</a>
         <a href="#ejemplo">12. Ejemplo completo</a>
+        <a href="#funcion">13. Crear una función personalizada</a>
     </nav>
 
     <main>
@@ -768,6 +769,71 @@ System.out.println(resultado);</code></pre>
             <div class="tip">
                 Intenta modificar los ejemplos, cambiar números, añadir condiciones
                 y provocar errores. Es una de las mejores formas de aprender.
+            </div>
+        </section>
+
+        <section id="funcion">
+            <h2>13. Crear una función personalizada</h2>
+
+            <p>
+                En Java, las funciones que creamos dentro de una clase se llaman
+                <strong>métodos</strong>. Sirven para agrupar instrucciones, reutilizarlas
+                y hacer que el programa sea más fácil de entender.
+            </p>
+
+            <h3>Estructura de un método</h3>
+
+            <pre><code><span class="kw">public static</span> <span class="type">tipoDevuelto</span> nombreDelMetodo(<span class="type">tipo</span> parametro) {
+    <span class="comment">// Instrucciones que realizará el método</span>
+    <span class="kw">return</span> resultado; <span class="comment">// Solo si devuelve un valor</span>
+}</code></pre>
+
+            <ul>
+                <li><code>public</code> permite llamar al método desde otras partes del programa.</li>
+                <li><code>static</code> permite llamarlo desde <code>main</code> sin crear un objeto.</li>
+                <li>El tipo devuelto puede ser <code>int</code>, <code>double</code>, <code>String</code>, etc. Si no devuelve nada, se usa <code>void</code>.</li>
+                <li>Los parámetros son los datos que recibe el método; puede tener ninguno, uno o varios.</li>
+                <li><code>return</code> entrega el resultado al lugar desde el que se llamó al método.</li>
+            </ul>
+
+            <h3>Ejemplo: calcular un área y saludar</h3>
+
+            <p>
+                Declara los métodos dentro de la clase, pero fuera de <code>main</code>.
+                Para usar uno, escribe su nombre y pasa los argumentos entre paréntesis.
+            </p>
+
+            <pre><code><span class="kw">public class</span> Main {
+
+    <span class="kw">public static void</span> main(String[] args) {
+
+        <span class="type">double</span> area = calcularArea(<span class="num">5.0</span>, <span class="num">3.0</span>);
+        System.out.println(<span class="str">"Área: "</span> + area);
+
+        saludar(<span class="str">"Manuel"</span>);
+
+    }
+
+    <span class="kw">public static</span> <span class="type">double</span> calcularArea(<span class="type">double</span> ancho, <span class="type">double</span> alto) {
+        <span class="kw">return</span> ancho * alto;
+    }
+
+    <span class="kw">public static void</span> saludar(<span class="type">String</span> nombre) {
+        System.out.println(<span class="str">"Hola, "</span> + nombre);
+    }
+
+}</code></pre>
+
+            <p>
+                <code>calcularArea(5.0, 3.0)</code> recibe dos números y devuelve un
+                <code>double</code>. <code>saludar("Manuel")</code> recibe un texto y lo
+                muestra; como es <code>void</code>, no devuelve ningún valor.
+            </p>
+
+            <div class="tip">
+                Usa nombres que expliquen lo que hace cada método, como
+                <code>calcularArea</code> o <code>mostrarMenu</code>. En Java suelen empezar
+                con minúscula y usar mayúscula al comenzar cada palabra nueva.
             </div>
         </section>
 
